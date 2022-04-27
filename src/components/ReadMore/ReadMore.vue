@@ -1,8 +1,8 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md readmore">
+  <div class="q-pa-md row readmore">
     <q-card class="my-card" flat bordered>
       <q-img src="assets/images/readmore.png" class="readmore-img">
-        <div>
+        <div class="d">
           <slot name="numbering"></slot>
         </div>
       </q-img>
@@ -13,7 +13,7 @@
       </q-card-section>
       <div v-show="expanded">
         <q-card-section class="readmore-font">
-          <div>
+          <div class="card-padding">
             <slot name="content"></slot>
           </div>
           <div class="readmore-padding" />
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       lorem:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "To overcome the limitation of previous mass-type Metaverse platforms that only focus on the value of digital assets and transaction volumes, ERUGO WORLD aims to be the sustainable Metaverse platform which connects with reality by providing valuable services to our investors.",
     };
   },
   setup() {
@@ -58,29 +58,58 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.q-card--bordered {
+  border: none;
+}
+.q-card {
+  border-radius: 0;
+}
+.q-card__section--vert {
+  padding: 0;
+}
 .my-card {
   width: 100%;
-  max-width: 400px;
-  box-shadow: 10px 10px 10px black;
+  max-width: 22vmax;
+  margin: 0 auto;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16) !important;
 }
 .q-img__content > div {
   font-family: "S-CoreDream7";
   font-weight: 700;
   background: transparent;
-  padding-left: 7%;
 }
 .readmore-title {
   font-family: "S-CoreDream7";
+  font-size: 0.9vmax;
+  padding: 1vmax 1.5vmax 0 1.5vmax;
 }
 .readmore-content {
   font-family: "S-CoreDream4";
 }
+.card-padding {
+  padding: 1vmax 1.5vmax 1.5vmax 1.5vmax;
+}
 .readmore-btn {
-  right: 45%;
-  width: 50px;
+  width: 15%;
+  max-width: 80px;
+  text-align: center;
   cursor: pointer;
 }
-.readmore-padding {
-  padding: 30px;
+.row {
+  display: flex;
+  flex-direction: column-reverse;
+}
+@media screen and (max-width: 768px) {
+  .readmore-btn {
+    width: 40px;
+  }
+  .readmore-padding {
+    margin-top: 5%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .my-card {
+    max-width: 100%;
+  }
 }
 </style>

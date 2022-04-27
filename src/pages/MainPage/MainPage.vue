@@ -59,10 +59,8 @@
 import TotalCursor from "@/components/Cursor/TotalCursor.vue";
 import Header from "../../components/Header/Header.vue";
 import { ref } from "vue";
-
 const screenWidth = screen.availWidth;
 const screenHeight = screen.availHeight;
-
 export default {
   data() {
     return {
@@ -214,7 +212,6 @@ export default {
 .my-card:nth-child(4) {
   margin-right: 1.5%;
 }
-
 .mainTitle {
   position: absolute;
   left: 50%;
@@ -268,7 +265,6 @@ export default {
 .q-slider__inner {
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
-
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -280,7 +276,6 @@ export default {
     background-position: 0% 50%;
   }
 }
-
 // 미디어쿼리
 @media screen and (max-width: 768px) {
   .mainBg {
@@ -312,7 +307,6 @@ export default {
   .my-card:nth-child(4) {
     margin: 0;
   }
-
   .mainTitle {
     font-size: 3.7vmax;
     width: 100%;

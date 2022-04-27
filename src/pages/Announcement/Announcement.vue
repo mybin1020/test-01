@@ -59,17 +59,17 @@
             eveniet doloribus ullam aliquid.
           </q-card-section>
         </q-card> -->
-        <div class="row justify-center q-pa-md flex flex-center">
+        <div class="row q-pa-md flex flex-center">
           <q-pagination
             class="announcement_page"
             v-model="pagination.page"
             color="grey-6"
             active-color="black"
             :max="pagesNumber"
-            size="1.5vw"
+            size="1.5vmax"
             direction-links
             flat
-            padding="1.5vw"
+            padding="1vmax"
             icon-prev="img:assets/images/announcement_btn_01.png"
             icon-next="img:assets/images/announcement_btn_02.png"
           />
@@ -113,7 +113,7 @@ const columns = [
     field: (row) => row.no,
     format: (val) => `${val}`,
     sortable: true,
-    style: "width: 10%; height: 5vw; font-size: 1.2vw",
+    style: "width: 10%; height: 5vmax; font-size: 1.2vmax",
   },
   {
     name: "Notice",
@@ -122,7 +122,7 @@ const columns = [
     field: (row) => row.notice,
     sortable: true,
     required: true,
-    style: "font-size: 1.2vw",
+    style: "font-size: 1.2vmax",
   },
 
   {
@@ -132,7 +132,7 @@ const columns = [
     align: "center",
     sortable: true,
     required: true,
-    style: "width: 10%; font-size: 1.2vw;",
+    style: "width: 10%; font-size: 1.2vmax;",
   },
 ];
 
@@ -228,7 +228,7 @@ export default {
 }
 .announcement-title {
   font-family: "S-CoreDream9";
-  font-size: 6rem;
+  font-size: 6vmax;
   margin: 10% auto;
   margin-bottom: 3%;
   text-align: center;
@@ -254,8 +254,8 @@ export default {
 }
 .q-icon > img {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 5vmin;
+  height: 5vmin;
 }
 .announcement-table {
   position: relative;
@@ -264,7 +264,6 @@ export default {
 .announcement_page {
   position: absolute;
   left: 50%;
-  bottom: -30%;
   transform: translateX(-50%);
 }
 .modal-card {
@@ -291,6 +290,47 @@ export default {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .announcement-title {
+    font-size: 5vmax;
+    margin-top: 10%;
+  }
+  .q-table {
+    tbody tr {
+      height: 10vmax;
+    }
+    th {
+      font-size: 3vmin;
+    }
+    td::after {
+      font-size: 5vmin;
+    }
+  }
+  .announcement-table {
+    margin: 1% 5%;
+  }
+  .announcement_page {
+    bottom: -10%;
+  }
+  @media screen and (max-width: 768px) {
+    .announcement-title {
+      font-size: 4vmax;
+      margin-top: 20%;
+    }
+    .announcement-table {
+      margin: 10% 2%;
+    }
+    .announcement_page {
+      bottom: 0;
+    }
+  }
+  @media screen and (max-width: 440px) {
+    .announcement-title {
+      font-size: 3vmax;
+      margin-top: 20%;
+    }
   }
 }
 </style>

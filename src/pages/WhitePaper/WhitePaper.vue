@@ -132,7 +132,6 @@ export default {
 //   width: 40vw;
 //   margin: 0;
 // }
-
 .paper-box {
   position: relative;
   width: 23vmax;
@@ -162,7 +161,6 @@ export default {
 .whitepaper-img4 {
   box-shadow: 0 0 70px 0 rgba(177, 1, 239, 0.4);
 }
-
 .whitepaper-img1:hover {
   background-color: #ffa1a1;
 }
@@ -175,7 +173,6 @@ export default {
 .whitepaper-img4:hover {
   background-color: #e7a2ff;
 }
-
 @media screen and (max-width: 920px) {
   .whitepaper-title {
     margin-top: 15%;

@@ -134,13 +134,13 @@ export default {
 }
 .logo,
 .btnWrapper {
-  line-height: 3vw;
+  line-height: 4vw;
 }
 .logo {
   background: url("mainLogo.png") no-repeat center;
   background-position: left;
-  background-size: contain;
-  width: 70%;
+  background-size: 22%;
+  width: 65%;
   text-indent: -99999999999999px;
 }
 .btnWrapper {
@@ -170,28 +170,44 @@ export default {
 .webMenu {
   width: 100%;
   display: flex;
-  letter-spacing: 5px;
-  font-size: 1.5vmax;
+  letter-spacing: 3px;
+  font-size: 1.2vmax;
   text-align: center;
   font-family: "S-CoreDream8";
 }
 .webMenu > div {
   position: relative;
   display: inline-block;
-  width: 8vmax;
-  // background-color: yellowgreen;
+  width: 9vmax;
+  //background-color: yellowgreen;
 }
 .webMenu > div::after {
   content: "";
   display: block;
   border: 1px solid #707070;
   position: absolute;
-  width: 3vmax;
-  height: 3vmax;
+  width: 3.2vmax;
+  height: 3.2vmax;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
+  right: 5%;
   border-radius: 50%;
+}
+.webMenu > div::before {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 12%;
+  transform: translateY(-50%);
+  background-color: #ff2300;
+  opacity: 0.19;
+  width: 2vmax;
+  height: 2vmax;
+  border-radius: 50%;
+}
+.webMenu > div:hover::before {
+  display: block;
 }
 
 // 미디어쿼리
@@ -200,6 +216,9 @@ export default {
   .btnWrapper {
     line-height: 4vmax;
   }
+  .logo {
+    background-size: 30%;
+  }
   .headBar {
     padding: 1% 0;
   }
@@ -207,6 +226,7 @@ export default {
 @media screen and (max-width: 760px) {
   .logo {
     width: 50%;
+    background-size: 60%;
   }
   .menuLink {
     font-size: 8vmin;
@@ -216,6 +236,9 @@ export default {
 @media screen and (max-width: 420px) {
   .webMenu {
     letter-spacing: 2px;
+  }
+  .logo {
+    background-size: 80%;
   }
 }
 </style>
