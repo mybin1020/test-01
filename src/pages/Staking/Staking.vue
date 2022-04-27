@@ -6,7 +6,6 @@
       <div class="staking-num">
         <q-img class="staking-img">
           <p class="stakingNum"></p>
-
           <span>Total Staking</span>
         </q-img>
         <q-img class="staking-img">
@@ -15,27 +14,40 @@
         </q-img>
       </div>
       <div class="staking-subtitle text-h3">Introducing EWC Staking</div>
-      <p class="staking-content text-h5">{{ staking.content }}</p>
+      <div class="staking-content text-h5">
+        <p>{{ staking.content }}</p>
+        <p>{{ staking.content2 }}</p>
+      </div>
       <div class="line" />
-      <div
-        class="q-pb-md row q-gutter-sm"
-        style="width: 85%; margin: 0 auto; text-align: start"
-      >
-        <div class="col col-md-6 col-sm-12 staking-bottom">
+      <div class="stacking-container">
+        <div class="staking-left">
           <div class="staking-subtitle2 text-h3">
             Precautions upon Staking Option Selection
           </div>
-          <p class="staking-content2 text-h5">{{ staking.content }}</p>
-          <ul>
-            <li>{{ staking.content }}</li>
-            <li>{{ staking.content }}</li>
-            <li>{{ staking.content }}</li>
+          <div class="staking-content2 text-h5">
+            <p>
+              Before applying for the staking option, EWC deposited in Tennten
+              or Btrade account must be transferred to the security wallet.
+            </p>
+            <p
+              class="link"
+              @click="linkHandler('https://www.securitywallet.co.kr/')"
+            >
+              (https://www.securitywallet.co.kr/)
+            </p>
+          </div>
+          <ul class="list">
+            <li>{{ list.content1 }}</li>
+            <li>{{ list.content2 }}</li>
+            <li>{{ list.content3 }}</li>
+            <li>{{ list.content4 }}</li>
           </ul>
           <div class="row q-col-gutter-lg" @click="stakingPopup">
             <q-img class="staking-btn"></q-img>
           </div>
         </div>
-        <div class="col col-md-5 col-sm-12 staking-box">
+        <div class="staking-right">
+          <div class="chart-title">Interest rate</div>
           <BarChart style="width: 90%; height: 550px; margin: auto" />
         </div>
       </div>
@@ -54,7 +66,19 @@ export default {
       count2: 164923,
       staking: {
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          "For the purpose of sustaining the stable development of the EWC ecosystem,the security wallet user will be rewarded when the user deposits the EWC for a promised period.",
+        content2:
+          "Automatic reward calculated as below will be transferred to the user account when the security wallet user deposits EWC. 12 months = 6% / year (0.5% / month), 9 months = 4.5% / year (0.375% / month), 6 months = 3% / year (0.25% / month), The minimum deposit start at 5,000. Coins will be deposited in the user’s account. fixed rewards will be installmentpayment will be processed in ERUGO WORLD COIN (EWC).",
+      },
+      list: {
+        content1:
+          " Withdrawal will be blocked during the promised deposit period.",
+        content2:
+          " The value of EWC may fluctuate during the promised deposit period.",
+        content3:
+          " Coins will be stored and saved in the user’s account during the promised deposit period.",
+        content4:
+          " EWC will be rewarded as a contribution to the stabilization of the ecosystem.",
       },
     };
   },
@@ -122,6 +146,10 @@ export default {
         "width=1400,height=750"
       );
     },
+
+    linkHandler(url) {
+      window.open(url);
+    },
   },
 
   mounted() {
@@ -131,60 +159,55 @@ export default {
 };
 </script>
 <style lang="scss" scope>
+*,
+p {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: "- ";
+}
+.link {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+.line {
+  border-right: 1px solid #363636;
+  height: 5vmax;
+  width: 50%;
+  margin: 3% 0;
+}
+
 .staking {
   width: 100%;
   height: 100%;
   position: relative;
 }
 .staking-title {
-  font-family: "S-CoreDream9";
-  font-size: 6vmax;
-  margin: 10% auto;
+  font-family: "S-CoreDream8";
+  font-size: 5.5vmax;
+  margin-top: calc(100px + 5vmax);
   margin-bottom: 3%;
   text-align: center;
 }
-.staking-subtitle,
-.staking-subtitle2 {
-  font-family: "S-CoreDream6";
-  margin: auto;
-  margin-top: 10%;
-  text-align: center;
-  width: 100%;
-  font-size: 4vmax;
-  line-height: 5vmax;
-}
-.staking-subtitle2 {
-  text-align: start;
-}
-.staking-content,
-.staking-content2 {
-  width: 60%;
-  margin: 3% auto;
-  line-height: 3vmax;
-  text-align: center;
-  font-family: "S-CoreDream4";
-  color: #727272;
-}
-.staking-content2 {
-  width: 100%;
-  text-align: start;
-  color: #363636;
-}
 .staking-num {
   position: relative;
-  width: 75%;
+  width: 60%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0 auto;
 }
 
 .staking-img {
-  width: 35%;
+  width: 45%;
   background: url("images/staking_btn_01.png") no-repeat center center;
   background-size: contain;
-  height: 20vw;
   p,
   span {
+    width: 100%;
+    text-align: center;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -192,40 +215,90 @@ export default {
     font-family: "S-CoreDream6";
   }
   p {
-    font-size: 3vw;
+    font-size: 2.5vmax;
   }
   span {
     font-family: "S-CoreDream4";
-    font-size: 2.1vw;
-    top: 85%;
+    font-size: 1.5vmax;
+    top: 90%;
     height: 20%;
   }
 }
-.line {
-  border-right: 1px solid #363636;
-  height: 150px;
-  width: 50%;
-  margin: 3% 0;
+.staking-subtitle,
+.staking-subtitle2 {
+  font-family: "S-CoreDream7";
+  margin: 0 auto;
+  margin-top: 5%;
+  text-align: center;
+  width: 100%;
+  font-size: 2vmax;
 }
-li,
-ul {
-  list-style: disc;
-  color: #727272;
-  margin-bottom: 2vw;
+.staking-content {
+  width: 50%;
+  margin: 2% auto;
+  line-height: 2;
+  text-align: center;
+  font-family: "S-CoreDream2";
+  color: #000;
+}
+.stacking-container {
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+}
+.staking-left,
+.staking-right {
+  margin: 0 auto;
+}
+.staking-left {
+  width: 40%;
+}
+.staking-right {
+  width: 50%;
+}
+
+// staking-left
+.staking-subtitle2 {
+  text-align: start;
+  line-height: 1.5;
+}
+.staking-content2 {
+  width: 100%;
+  text-align: start;
+  font-family: "S-CoreDream4";
+  line-height: 1.6;
+  color: #000;
+  margin: 5% auto;
+}
+.list {
+  margin-left: 2%;
+  font-family: "S-CoreDream2";
+  font-size: 0.8vmax;
+}
+.list > li {
+  padding-bottom: 1%;
 }
 .staking-btn {
-  height: 12vw;
+  height: 12vmax;
   background: url("images/staking_btn_03.png") no-repeat center center;
   background-size: contain;
+  cursor: pointer;
 }
 .staking-btn:hover {
-  height: 12vw;
+  height: 12vmax;
   background: url("images/staking_btn_04.png") no-repeat center center;
   background-size: contain;
+  cursor: pointer;
 }
-.staking-box {
-  margin: auto;
+
+//staking-right
+.chart-title {
+  text-align: center;
+  font-family: "S-CoreDream7";
+  font-size: 1vmax;
 }
+
 @media screen and (max-width: 1024px) {
   .staking-content,
   .staking-content2 {
@@ -248,7 +321,7 @@ ul {
     .staking-btn {
       margin-top: 5%;
     }
-    .staking-box {
+    .staking-left {
       height: 500px;
     }
   }
