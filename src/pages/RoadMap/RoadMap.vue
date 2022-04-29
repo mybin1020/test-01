@@ -16,17 +16,19 @@
           v-model="slide"
           ref="carousel"
           infinite
-          height="50vh"
+          height="100%"
           transition-duration="1200"
-          style="background-color: transparent"
+          style="background-color: transparent; margin: 5% auto"
         >
-          <q-carousel-slide :name="1" class="column no-wrap">
-            <div class="row justify-center items-center q-col-gutter no-wrap">
+          <q-carousel-slide :name="1" class="column no-wrap list-container">
+            <div
+              class="row justify-center items-center q-col-gutter no-wrap listing"
+            >
               <q-img
                 v-for="(r, i) in roadmap"
                 :key="i"
                 :name="i"
-                class="col-3"
+                class="col-3 list-item"
                 :id="r.title"
                 :src="r.src"
               >
@@ -36,13 +38,15 @@
             </div>
           </q-carousel-slide>
 
-          <q-carousel-slide :name="2" class="column no-wrap">
-            <div class="row justify-center items-center q-col-gutter no-wrap">
+          <q-carousel-slide :name="2" class="column no-wrap list-container">
+            <div
+              class="row justify-center items-center q-col-gutter no-wrap listing"
+            >
               <q-img
                 v-for="(r, i) in roadmap2"
                 :key="i + 4"
                 :name="i + 4"
-                class="col-3"
+                class="col-3 list-item"
                 :id="r.title"
                 :src="r.src"
               >
@@ -83,7 +87,6 @@
       <div class="roadmap-subtitle2 text-h2">OF METAVERSE</div>
       <q-img src="assets/images/roadmap_map.png">
         <div class="line-vertical" />
-
         <!-- Metaverse -->
         <div class="roadmapmeta">
           <q-carousel
@@ -263,22 +266,21 @@
 // :img-src="`assets/images/roadmap_0${i + 1}.png`"
 import Header from "../../components/Header/Header.vue";
 import PageController from "../../components/PageController/PageController.vue";
-
 import { ref } from "vue";
-
 export default {
   data() {
     return {
       roadmap: [
-        { title: "LBANK", src: "assets/images/roadmap_01.png" },
-        { title: "CONSBIT", src: "assets/images/roadmap_02.png" },
-        { title: "BITTREX", src: "assets/images/roadmap_03.png" },
+        { title: "XEXC", src: "assets/images/roadmap_01.jpg" },
+        { title: "LBANK", src: "assets/images/roadmap_02.jpg" },
+        { title: "CONSBIT", src: "assets/images/roadmap_03.jpg" },
+        { title: "BITTREX", src: "assets/images/roadmap_04.jpg" },
       ],
       roadmap2: [
-        { title: "coinUtop", src: "assets/images/roadmap_04.png" },
-        { title: "TENNTEN", src: "assets/images/roadmap_05.png" },
-        { title: "Btrade", src: "assets/images/roadmap_06.png" },
-        { title: "XTCOM", src: "assets/images/roadmap_07.png" },
+        { title: "coinUtop", src: "assets/images/roadmap_05.jpg" },
+        { title: "TENNTEN", src: "assets/images/roadmap_06.jpg" },
+        { title: "Btrade", src: "assets/images/roadmap_07.jpg" },
+        { title: "XTCOM", src: "assets/images/roadmap_08.jpg" },
       ],
       roadmap3: [
         {
@@ -307,7 +309,6 @@ export default {
           text: "Background concept, character, 3D build(3D, Making a model)",
         },
       ],
-
       roadmap4: [
         {
           content: "dd",
@@ -370,7 +371,6 @@ export default {
     };
   },
   components: { Header, PageController },
-
   setup() {
     return {
       slide: ref(1),
@@ -386,8 +386,8 @@ export default {
   overflow: hidden;
   position: relative;
 }
-.roadmap-title,
-.roadmap-title2 {
+
+.roadmap-title {
   font-family: "S-CoreDream9";
   font-size: 6vmax;
   margin: 10% auto;
@@ -396,11 +396,12 @@ export default {
 }
 .roadmap-title2 {
   font-size: 1vmin;
+  text-align: center;
 }
 .roadmap-title3 {
   font-family: "S-CoreDream6";
-  top: 80%;
-  width: 0;
+  bottom: 0;
+  text-align: center;
 }
 .roadmap-subtitle,
 .roadmap-subtitle2 {
@@ -421,7 +422,7 @@ export default {
 }
 .line-vertical {
   position: relative;
-  border-top: 0.5px solid #cfcfcf;
+  border-top: 0.5px solid black;
   position: absolute;
   width: 100vw;
   top: 50%;
@@ -429,13 +430,61 @@ export default {
 }
 
 .roadmaplist {
-  position: relative;
+  // position: relative;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   width: 100%;
-  top: 50%;
   overflow: hidden;
+}
+.list-container {
+  position: relative;
+  padding: 0;
+}
+.listing {
+  position: relative;
+  .list-item {
+    width: 25%;
+    height: 20vw;
+    left: 2%;
+    div {
+      position: absolute;
+      width: 80%;
+      // left: 50%;
+      // transform: translateX(-50%);
+    }
+    img {
+      position: absolute;
+      z-index: 9999;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: contain !important;
+      object-position: 50% 50%;
+      width: 60%;
+      height: 60%;
+      background-color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      padding: 10%;
+      box-shadow: 0 0 80px 0 rgba(252, 16, 104, 0.5);
+    }
+  }
+}
+.listing::before {
+  content: "";
+  display: block;
+  border-bottom: 25px solid #c9c9c9;
+  opacity: 0.15;
+  width: 100%;
+  position: absolute;
+}
+.listing::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #c9c9c9;
+  width: 100%;
+  position: absolute;
 }
 
 // 메타버스
@@ -457,11 +506,9 @@ export default {
   justify-content: space-evenly;
   width: 100%;
 }
-
 .carousel-ctr2 {
   position: fixed;
 }
-
 .q-img__content > div {
   position: absolute;
   background: transparent;

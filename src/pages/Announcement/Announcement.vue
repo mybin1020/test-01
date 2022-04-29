@@ -1,64 +1,37 @@
 <template>
-  <div>
+  <div id="app">
     <Header />
-    <q-layout class="announcement">
-      <div class="announcement-title">ANNOUNCEMENT</div>
-      <div class="q-pa-md announcement-table">
-        <q-table
-          :rows="rows"
-          :columns="columns"
-          row-key="name"
-          card-class="bg-transparent"
-          v-model:pagination="pagination"
-          hide-pagination
-          binary-state-sort
-          flat
-          @click="modal = !modal"
-        >
-        </q-table>
-
-        <!-- 모달 -->
-
-        <q-card class="modal-card" v-show="modal">
-          <q-card-section style="display: flex">
-            <q-card-actions class="modal-card-header">
-              <q-btn
-                flat
-                label="뒤로가기"
-                color="secondary"
-                v-close-popup
-                @click="modal = !modal"
-              />
-            </q-card-actions>
-            <div class="text-h6" style="width: 90%; text-align: center">
-              {{ rows[0].notice }}
+    <q-layout class="container announcement">
+      <div id="media-list">
+        <div class="announcement-title">Announcement</div>
+        <ul>
+          <li>
+            <div class="announcement-list title row text-right">
+              <span class="col-1" style="text-align: left">NO</span>
+              <span class="col-9" style="text-align: center">Notice</span>
+              <span class="col-2">Date</span>
             </div>
-          </q-card-section>
-
-          <q-separator />
-
-          <q-card-section style="max-height: 30vh" class="scroll">
-            <p v-for="n in 15" :key="n">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-              repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis
-              perferendis totam, ea at omnis vel numquam exercitationem aut,
-              natus minima, porro labore.
-            </p>
-          </q-card-section>
-
-          <q-separator />
-        </q-card>
-
-        <!-- 모달 -->
-
-        <!-- <q-card v-show="isTogglePage">
-          <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem,
-            eius reprehenderit eos corrupti commodi magni quaerat ex numquam,
-            dolorum officiis modi facere maiores architecto suscipit iste
-            eveniet doloribus ullam aliquid.
-          </q-card-section>
-        </q-card> -->
+          </li>
+          <li
+            v-show="type === '' || type === a.type"
+            v-for="(a, i) in announcement"
+            :key="i"
+            v-on:click="toggleDetail(a)"
+          >
+            <div class="announcement-list row text-right">
+              <span class="col-1 font-bold" style="text-align: left">{{
+                i + 1
+              }}</span>
+              <span class="col-9" style="text-align: center">{{
+                a.title
+              }}</span>
+              <span class="col-2 font-bold">{{ a.date }}</span>
+            </div>
+            <div v-show="a.showDetail" class="announcement-detail">
+              <p>{{ a.summary }}</p>
+            </div>
+          </li>
+        </ul>
         <div class="row q-pa-md flex flex-center">
           <q-pagination
             class="announcement_page"
@@ -66,7 +39,7 @@
             color="grey-6"
             active-color="black"
             :max="pagesNumber"
-            size="1.5vmax"
+            size="2vmin"
             direction-links
             flat
             padding="1vmax"
@@ -74,30 +47,12 @@
             icon-next="img:assets/images/announcement_btn_02.png"
           />
         </div>
-        <!-- <q-list bordered class="rounded-borders" v-for="(e, i) in 6" :key="i">
-          <q-expansion-item
-            group="somegroup"
-            icon="explore"
-            label="First"
-            caption="First"
-            default-opened
-            header-class="text-grey-10"
-          >
-            <q-card style="height: 10vw">
-              <q-card-section>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex
-                numquam, dolorum officiis modi facere maiores architecto
-                suscipit iste eveniet doloribus ullam aliquid.
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-        </q-list> -->
       </div>
       <PageController />
     </q-layout>
   </div>
 </template>
+
 <script>
 import Header from "../../components/Header/Header.vue";
 import PageController from "../../components/PageController/PageController.vue";
@@ -124,7 +79,6 @@ const columns = [
     required: true,
     style: "font-size: 1.2vmax",
   },
-
   {
     name: "Date",
     label: "Date",
@@ -135,7 +89,6 @@ const columns = [
     style: "width: 10%; font-size: 1.2vmax;",
   },
 ];
-
 const rows = [
   {
     no: 1,
@@ -152,49 +105,70 @@ const rows = [
     notice: "I'm a really great person.3",
     date: date,
   },
-  {
-    no: 4,
-    notice: "I'm a really great person.4",
-    date: date,
-  },
-  {
-    no: 5,
-    notice: "I'm a really great person.5",
-    date: date,
-  },
-  {
-    no: 6,
-    notice: "I'm a really great person.6",
-    date: date,
-  },
-  {
-    no: 7,
-    notice: "I'm a really great person.7",
-    date: date,
-  },
-  {
-    no: 8,
-    notice: "I'm a really great person.",
-    date: date,
-  },
-  {
-    no: 9,
-    notice: "I'm a really great person.",
-    date: date,
-  },
-  {
-    no: 10,
-    notice: "I'm a really great person.",
-    date: date,
-  },
-  {
-    no: 11,
-    notice: "I'm a really great person.",
-    date: date,
-  },
 ];
+console.log(now);
 export default {
   components: { Header, PageController },
+  data() {
+    return {
+      type: "",
+      announcement: [
+        {
+          title:
+            "[Notice] Erugo World Coin (EWC) listed in Coin Market Cap (CMC), Cryptocurrency site",
+          date: date,
+          summary:
+            "Erugo World Coin (EWC) was listed on Coin Market Cap (CMC), the world's largest cryptocurrency information site, on January 27, 2022.Coin Market Cap (CMC) is a website that provides trading volume, white papers, and rankings of the world's largest cryptocurrency and cryptocurrency exchanges established in 2013. It is currently the most reliable cryptocurrency site.ERUGO INC CEO Kim Jung-soo said “I am happy to be able to give more trust and faith to everyone who accompanies the EWC by registering it on a trusted cryptocurrency site.” Also, he said “I will continue to deliver better news through continuous updates and project announcements” too.",
+          type: "nonfiction",
+          contributor: "Barack Obama",
+          showDetail: false,
+        },
+        {
+          title: "[Notice] ErugoWorldCoin will be list on Bittrex Global",
+          date: date,
+          summary: `Erugo World Coin will be listed on Bittrex Global at 07:00 on January 20, 2022(KST). 
+          As a result, you will be able to create a wallet for transactions from 07:00 on January 19th(KST). Bittrex is an American cryptocurrency exchange that opened on February 28, 2014, and has considerable public confidence.
+Bittrex is one of Forbes' top 10 cryptocurrency exchanges in the world. In 2019, they entered the European cryptocurrency market by establishing Bittrex Global in Lichtenstein.
+
+Kim Jung-soo, CEO of Erugo INC, said Erugo World Coin chose Bittrex as its first listed exchange in 2022. As stated in the roadmap, we will continue to be listed so that the base of Erugo World Coin can be expanded.
+
+In the future, we, Erugo World Coin, will continue to create a reasonable value for Erugo World Coin through a continuous base expansion strategy.`,
+          type: "nonfiction",
+          contributor: "Glennon Doyle",
+          showDetail: false,
+        },
+        {
+          title: "I'm a great person",
+          date: date,
+          summary:
+            "The Academy Award-winning actor shares snippets from the diaries he kept over the last 35 years.",
+          type: "nonfiction",
+          contributor: "Matthew McConaughey",
+          showDetail: false,
+        },
+      ],
+    };
+  },
+  methods: {
+    toggleDetail(a) {
+      a.showDetail = !a.showDetail;
+    },
+    filterList() {
+      this.type = event.target.value;
+    },
+  },
+  computed: {
+    uniqueItemsList: function () {
+      var types = [];
+      this.announcement.forEach((item) => {
+        if (!types.includes(item.type)) {
+          types.push(item.type);
+        }
+      });
+
+      return types;
+    },
+  },
   setup() {
     const pagination = ref({
       sortBy: "desc",
@@ -204,7 +178,6 @@ export default {
     });
     const isTogglePage = ref(false);
     const modal = ref(false);
-
     return {
       pagination,
       columns,
@@ -219,68 +192,85 @@ export default {
 };
 </script>
 <style lang="scss" scope>
+* {
+  padding: 0;
+  margin: 0;
+}
+.q-layout {
+  min-height: 100% !important;
+  padding: 0;
+  margin: 0;
+}
+#app {
+  font-family: "S-CoreDream4";
+  text-align: center;
+  margin: 3vmax auto;
+}
 .announcement {
   width: 100%;
-  height: 100%;
   position: absolute;
-  background: url("images/announcement_bg.png") 100% 100% no-repeat;
-  animation: gradient 4s ease-in-out infinite;
+  top: 0;
+  background: url("images/announcement_bg.png") no-repeat;
+  background-size: 200% 200%;
+  animation: gradient 5s ease-in-out infinite;
 }
 .announcement-title {
-  font-family: "S-CoreDream9";
-  font-size: 6vmax;
+  font-family: "S-CoreDream8";
+  font-size: 5vmax;
   margin: 10% auto;
   margin-bottom: 3%;
   text-align: center;
 }
-.q-table th {
-  font-size: 1.4vw;
-  border-bottom: 5px solid grey;
-  padding-bottom: 0.5%;
+.title > span {
+  font-family: "S-CoreDream5";
+  font-size: 1vmax;
+}
+.announcement-list,
+.announcement-detail {
+  position: relative;
+  font-size: 1vmax;
+  border-bottom: 1px solid grey;
+  width: 60%;
+  margin: 0 auto;
+  font-family: "S-CoreDream5";
+}
+.announcement-list {
+  padding: 1% 0;
+}
+.announcement-detail {
+  font-size: 1.5vmin;
+  font-family: "S-CoreDream4";
+  line-height: 1.5;
+  padding: 2% 0;
+
+  p {
+    margin: 0;
+  }
+}
+.font-bold {
+  font-family: "S-CoreDream7";
+}
+ul > li:first-child {
   position: relative;
 }
-.q-table th.sortable {
-  padding: 2vw;
-}
-.q-table th::after {
+ul > li:first-child::before {
   content: "";
   display: block;
   position: absolute;
-  left: 0;
-  bottom: -8%;
-  width: 100%;
+  width: 60%;
   border-bottom: 3px solid #6b6b6b;
-  margin-bottom: 1vw;
-}
-.q-icon > img {
-  position: absolute;
-  width: 5vmin;
-  height: 5vmin;
-}
-.announcement-table {
-  position: relative;
-  margin: 1% 10%;
-}
-.announcement_page {
-  position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  bottom: 5%;
 }
-.modal-card {
-  width: 100%;
-  max-width: 80vw;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  align-items: center;
-  background-color: rgba(255, 255, 255);
-  .modal-card-header {
-    width: 10%;
-    text-align: center;
-    padding: 0;
-  }
+li {
+  border: none;
+  text-align: left;
 }
+.announcement_page {
+  margin-right: 5%;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -297,33 +287,11 @@ export default {
     font-size: 5vmax;
     margin-top: 10%;
   }
-  .q-table {
-    tbody tr {
-      height: 10vmax;
-    }
-    th {
-      font-size: 3vmin;
-    }
-    td::after {
-      font-size: 5vmin;
-    }
-  }
-  .announcement-table {
-    margin: 1% 5%;
-  }
-  .announcement_page {
-    bottom: -10%;
-  }
+
   @media screen and (max-width: 768px) {
     .announcement-title {
       font-size: 4vmax;
       margin-top: 20%;
-    }
-    .announcement-table {
-      margin: 10% 2%;
-    }
-    .announcement_page {
-      bottom: 0;
     }
   }
   @media screen and (max-width: 440px) {

@@ -42,13 +42,13 @@
             <li>{{ list.content3 }}</li>
             <li>{{ list.content4 }}</li>
           </ul>
-          <div class="row q-col-gutter-lg" @click="stakingPopup">
+          <div @click="stakingPopup">
             <q-img class="staking-btn"></q-img>
           </div>
         </div>
         <div class="staking-right">
           <div class="chart-title">Interest rate</div>
-          <BarChart style="width: 90%; height: 550px; margin: auto" />
+          <BarChart class="bar-chart" />
         </div>
       </div>
       <PageController />
@@ -298,31 +298,151 @@ li {
   font-family: "S-CoreDream7";
   font-size: 1vmax;
 }
+.bar-chart {
+  width: 90%;
+  height: 24vmax;
+  margin: auto;
+}
+
+@media screen and (max-width: 1920px) {
+  .staking-content {
+    width: 65%;
+  }
+}
 
 @media screen and (max-width: 1024px) {
-  .staking-content,
-  .staking-content2 {
-    font-size: 2vmax;
-    line-height: 2.5vmax;
+  .stacking-container {
+    width: 90%;
   }
-  @media screen and (max-width: 768px) {
+  .staking-subtitle,
+  .staking-subtitle2 {
+    font-size: 2.5vmax;
+  }
+  .staking-content {
+    font-size: 2vmax;
+    line-height: 1.5;
+  }
+  .staking-content2,
+  .list,
+  .chart-title {
+    font-size: 1.5vmax;
+  }
+  .bar-chart {
+    height: 40vmax;
+  }
+  .staking-btn {
+    margin-top: 5%;
+  }
+
+  @media screen and (max-width: 920px) {
+    .staking-content {
+      width: 80%;
+    }
     .staking-title {
       margin-top: 15%;
     }
     .staking-subtitle,
     .staking-subtitle2 {
-      font-size: 3vmax;
+      font-size: 2.5vmax;
     }
     .staking-content,
     .staking-content2 {
       font-size: 1.5vmax;
       line-height: 2.5vmax;
     }
+
     .staking-btn {
       margin-top: 5%;
     }
-    .staking-left {
-      height: 500px;
+  }
+  @media screen and (max-width: 720px) {
+    .staking-title {
+      margin-top: 10%;
+      font-size: 7vmax;
+    }
+    .staking-num {
+      margin: 4% auto;
+      width: 80%;
+    }
+    .line {
+      height: 10vmax;
+      margin: 8% 0;
+    }
+    .stacking-container {
+      display: block;
+    }
+    .staking-left,
+    .staking-right {
+      width: 100%;
+    }
+    .staking-subtitle2,
+    .staking-content2 {
+      text-align: center;
+    }
+    .staking-subtitle,
+    .staking-subtitle2 {
+      font-size: 3vmax;
+    }
+    .staking-content,
+    .staking-content2,
+    .list,
+    .chart-title {
+      font-size: 1.8vmax;
+      line-height: 2;
+    }
+    .staking-content2,
+    .list {
+      width: 80%;
+    }
+
+    .staking-subtitle2 {
+      width: 60%;
+    }
+
+    .list {
+      margin: 0 auto;
+      li {
+        padding-bottom: 0;
+      }
+    }
+    .staking-btn {
+      height: 16vmax;
+    }
+    .chart-title {
+      margin-top: 5%;
+    }
+    .bar-chart {
+      margin-bottom: 10%;
+    }
+  }
+  @media screen and (max-width: 420px) {
+    .staking-title {
+      margin-top: 20%;
+      font-size: 6vmax;
+    }
+    .staking-num {
+      margin: 5% auto;
+    }
+    .staking-img {
+      p {
+        font-size: 2vmax;
+      }
+    }
+    .staking-subtitle,
+    .staking-subtitle2 {
+      font-size: 2.5vmax;
+    }
+    .staking-subtitle2 {
+      width: 80%;
+    }
+    .staking-content2 {
+      width: 100%;
+    }
+    .list {
+      width: 90%;
+    }
+    .staking-btn {
+      margin-top: 0;
     }
   }
 }
